@@ -3,6 +3,8 @@
 #include <windows.h>
 #include <cstdlib>
 
+#include "Player/PlayerInput.h"
+
 using namespace std;
 
 int main()
@@ -16,49 +18,33 @@ int main()
     int playerPos = screenWidth / 2;      // 自キャラの初期位置（中央）
     int score = 0;                      // スコア（例として更新）
 
+
+    PlayerInput* playerInput = new PlayerInput();
+
     while (true)
     {
         // .5秒待機
         Sleep(frameUpdateMs);
         score++;  // スコアを更新
-
         
         // キー入力の処理
-        if (_kbhit())
+        playerInput->Update();
+        if (playerInput->GetMoveLeft() && playerPos > 0)
         {
-            int ch = _getch();
-            // 矢印キーの場合、先頭が0または224
-            if (ch == 0 || ch == 224)
-            {
-                int arrow = _getch();
-                
-                // 左矢印キー（コード75）
-                if (arrow == 75 && playerPos > 0)
-                {
-                    playerPos--;
-                }
-                // 右矢印キー（コード77）
-                else if (arrow == 77 && playerPos < screenWidth - 1)
-                {
-                    playerPos++;
-                }
-
-            }
-            else
-            {
-                if ( ch == 'a' && playerPos > 0)
-                {
-                    playerPos--;
-                }
-                else if (ch == 'd' && playerPos < screenWidth - 1)
-                {
-                    playerPos++;
-                }
-                else if (ch == 'q')
-                {
-                    return 0;
-                }
-            }
+            playerPos--;
+        }
+        else if (playerInput->GetMoveRight() && playerPos < screenWidth - 1)
+        {
+            playerPos++;
+        }
+        else if (playerInput->GetShoot())
+        {
+            // 何かしらの処理
+        }
+        else if (playerInput->GetExit())
+        {
+            delete playerInput;
+            return 0;
         }
 
         // 画面をクリアして最上部にカーソルを移動
@@ -107,5 +93,7 @@ int main()
         cout.flush();
     }
 
+
+    
     return 0;
 }
