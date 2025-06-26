@@ -31,3 +31,10 @@
 *.out
 *.app
 x64
+
+# C# build artifacts
+/bin/
+/obj/
+
+# JetBrains IDE files
+/.idea/
