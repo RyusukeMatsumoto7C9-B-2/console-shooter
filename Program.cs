@@ -23,7 +23,7 @@ class Program
             game.UpdateScore();
 
             // キー入力の処理
-            if (Console.KeyAvailable)
+            while (Console.KeyAvailable)
             {
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                 if (keyInfo.Key == ConsoleKey.Q)
