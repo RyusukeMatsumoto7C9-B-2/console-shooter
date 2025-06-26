@@ -38,3 +38,7 @@ x64
 
 # JetBrains IDE files
 /.idea/
+
+# Test project build artifacts
+console-shooter.Tests/bin/
+console-shooter.Tests/obj/
