@@ -1,5 +1,0 @@
-feat: 入力処理の改善
-
-Details:
-- `Program.cs` のキー入力処理を `if (Console.KeyAvailable)` から `while (Console.KeyAvailable)` に変更。
-- これにより、複数のキー入力が同時に発生した場合でも、すべての入力が処理されるようになり、入力の取りこぼしが減少する。

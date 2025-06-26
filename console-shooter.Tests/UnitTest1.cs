@@ -66,5 +66,25 @@ namespace console_shooter.Tests
             // Assert
             Assert.Equal(initialScore + 1, game.Score);
         }
+
+        [Fact]
+        public void MovePlayer_MultipleInputs_ProcessesAllMoves()
+        {
+            // Arrange
+            var game = new Game(30);
+            var initialPos = game.PlayerPos; // Assuming initialPos is 15 for screenWidth 30
+
+            // Act: Move right 5 times, then left 2 times
+            game.MovePlayer(ConsoleKey.RightArrow);
+            game.MovePlayer(ConsoleKey.RightArrow);
+            game.MovePlayer(ConsoleKey.RightArrow);
+            game.MovePlayer(ConsoleKey.RightArrow);
+            game.MovePlayer(ConsoleKey.RightArrow);
+            game.MovePlayer(ConsoleKey.LeftArrow);
+            game.MovePlayer(ConsoleKey.LeftArrow);
+
+            // Assert: Expected position is initialPos + 5 - 2 = initialPos + 3
+            Assert.Equal(initialPos + 3, game.PlayerPos);
+        }
     }
 }
